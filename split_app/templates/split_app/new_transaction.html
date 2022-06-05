@@ -1,0 +1,13 @@
+{% extends 'split_app/base.html' %}
+
+{% block content %}
+<p>Add new transaction</p>
+
+    <form action="{% url 'split_app:new_transaction' %}" method='post'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">Add transaction</button>
+    </form>
+
+
+{% endblock %}
