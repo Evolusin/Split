@@ -1,0 +1,34 @@
+import datetime
+
+import django.utils.timezone
+from django.db import models
+from django.contrib.auth.models import User
+import split_app.choices as c
+
+# Create your models here.
+# class Status(models.IntegerChoices):
+
+# status = ((0, 'New'), (1, 'Done'))
+
+
+class Transaction(models.Model):
+    """A transaction that person starts"""
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    t_desc = models.TextField(blank=True, null=True)
+    t_date = models.DateField()
+    t_status = models.CharField(default=c.new, editable=False, max_length=16)
+
+    def __str__(self):
+        return f"{self.owner} - {self.t_date} - {self.t_status}"
+
+
+class Obligation(models.Model):
+    transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    desc = models.TextField()
+    value = models.DecimalField(max_digits=6, decimal_places=2)
+    optional_value = models.DecimalField(max_digits=6, decimal_places=2)
+    o_status = models.CharField(default=c.new, choices=c.status, max_length=16)
+    payment_date = models.DateField(default=django.utils.timezone.now)
+    def __str__(self):
+        return f"{self.desc} - {self.value} - {self.payment_date} - {self.user}"

@@ -1,0 +1,14 @@
+{% extends 'split_app/base.html' %}
+
+{% block content %}
+
+    <ul>
+    {% for trans in transactions %}
+            <li>
+            <a href="{% url 'split_app:transaction' trans.id %}">{{ trans }}</a>
+            </li>
+    {% empty %}
+        <li>No transactions</li>
+    {% endfor %}
+    </ul>
+{% endblock %}
