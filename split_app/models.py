@@ -15,7 +15,7 @@ class Transaction(models.Model):
     """A transaction that person starts"""
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     t_desc = models.TextField(blank=True, null=True)
-    t_date = models.DateField(help_text="")
+    t_date = models.DateField()
     t_status = models.CharField(default=c.new, editable=False, max_length=16)
 
     def __str__(self):

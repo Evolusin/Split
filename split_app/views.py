@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Transaction, Obligation
-from .forms import TransactionForm
+from .forms import TransactionForm, ObligationForm
 # Create your views here.
 def index(req):
     return render(req,'split_app/index.html')
@@ -28,7 +28,26 @@ def new_transaction(request):
         form = TransactionForm(data=request.POST)
         if form.is_valid():
             form.save()
-            return redirect('split_app:transactions')
+            return redirect('split_app:Transactions')
 
     context = {'form':form}
     return render(request, 'split_app/new_transaction.html',context)
+
+def new_obligation(request, transaction_id):
+    """Adds new obligation"""
+    transaction = Transaction.objects.get(id=transaction_id)
+    if request.method != 'POST':\
+        form = ObligationForm()
+    else:
+        form = ObligationForm(data=request.POST)
+        if form.is_valid():
+            new_obligation = form.save(commit=False)
+            new_obligation.transaction = transaction
+            new_obligation.save()
+            return redirect('split_app:Transactions', transaction_id=transaction_id)
+    context = {'transaction':transaction,'form':form}
+    return render(request,'split_app/new_obligation.html', context)
+
+
+
+

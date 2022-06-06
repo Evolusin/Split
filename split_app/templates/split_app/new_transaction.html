@@ -1,7 +1,7 @@
 {% extends 'split_app/base.html' %}
 
 {% block content %}
-<p>Add new transaction</p>
+<p>Dodaj nowego splita</p>
 
     <form action="{% url 'split_app:new_transaction' %}" method='post'>
     {% csrf_token %}
