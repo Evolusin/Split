@@ -21,4 +21,10 @@ class ObligationForm(forms.ModelForm):
     class Meta:
         model = Obligation
         fields = ['transaction','user', 'desc', 'value', 'optional_value']
+        labels = {
+            'transaction':'Który split','user': 'Winny', 'desc': 'Za co?', 'value':'Ile zł', 'optional_value':'Koszty dodatkowe'
+        }
+        widgets = {
+            'desc':forms.Textarea(attrs={'rows':2,'cols':20})
+        }
 

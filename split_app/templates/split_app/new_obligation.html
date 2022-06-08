@@ -1,0 +1,14 @@
+{% extends 'split_app/base.html' %}
+
+{% block content %}
+    <p><a href="{% url 'split_app:transaction' transaction.id %}">{{ transaction }}</a></p>
+
+    <p>Dodaj nową należność:</p>
+    <form action="{% url 'split_app:new_obligation' transaction.id %}" method='post'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">Dodaj należność</button>
+    </form>
+
+
+{% endblock %}

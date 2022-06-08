@@ -1,15 +1,23 @@
 {% extends 'split_app/base.html' %}
 
 {% block content %}
-{#<p>Transaction: {{ transaction }}</p>#}
+<p>Split: {{ transaction }}</p>
 
 <p>Obligations:</p>
+    <p>
+    <a href="{% url 'split_app:new_obligation' transaction.id %}"> Dodaj nową należność </a>
+    </p>
+
 <ul>
 {% for oblig in obligations %}
     <li>
         <p>{{ oblig.payment_date }}</p>
-        <p>{{ oblig.value }}</p>
+        <p>{{ oblig.value  }} zł</p>
+        <p>{{ oblig.optional_value }} zł</p>
         <p>{{ oblig.desc|linebreaks }}</p>
+        <p>
+            <a href = "{% url 'split_app:edit_obligation' oblig.id %}">Edytuj</a>
+        </p>
     </li>
 {% empty %}
     <li>There is no obligations for this transaction</li>

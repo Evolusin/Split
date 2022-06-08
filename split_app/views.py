@@ -35,8 +35,9 @@ def new_transaction(request):
 
 def new_obligation(request, transaction_id):
     """Adds new obligation"""
+    # transaction = Transaction.objects.get(id=transaction_id)
     transaction = Transaction.objects.get(id=transaction_id)
-    if request.method != 'POST':\
+    if request.method != 'POST':
         form = ObligationForm()
     else:
         form = ObligationForm(data=request.POST)
@@ -44,9 +45,24 @@ def new_obligation(request, transaction_id):
             new_obligation = form.save(commit=False)
             new_obligation.transaction = transaction
             new_obligation.save()
-            return redirect('split_app:Transactions', transaction_id=transaction_id)
+            return redirect('split_app:transaction', transaction_id=transaction_id)
     context = {'transaction':transaction,'form':form}
     return render(request,'split_app/new_obligation.html', context)
+
+def edit_obligation(request, obligation_id):
+    """Edits obligation"""
+    obligation = Obligation.objects.get(id=obligation_id)
+    transaction = obligation.transaction
+    if request.method != 'POST':
+        form = ObligationForm(instance=obligation)
+    else:
+        form = ObligationForm(instance=obligation, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('split_app:transaction', transaction_id = transaction.id)
+
+    context = {'obliagtion':obligation,'transaction':transaction, 'form':form}
+    return render(request,'split_app/edit_obligation.html', context)
 
 
 
