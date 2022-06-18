@@ -8,6 +8,13 @@
     <p>
         <a href="{% url 'split_app:index' %}">Split App</a>
         <a href="{% url 'split_app:Transactions' %}">List of transactions</a>
+        {% if user.is_authenticated %}
+            Witaj, {{ user.username }}
+            <a href="{% url 'users:logout' %}">Wyloguj sie</a>
+        {% else %}
+            <a href="{% url 'users:register' %}">Zarejestruj się</a>
+            <a href="{% url 'users:login' %}">Zaloguj się</a>
+        {% endif %}
     </p>
 {% block content %}
 

@@ -1,0 +1,12 @@
+{% extends 'split_app/base.html' %}
+{% block content %}
+
+    <form method="post" action="{% url 'users:register' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+    <button name="submit">Zarejestruj się</button>
+    <input type="hidden" name="next" value="{% url 'split_app:index' %}"
+    </form>
+
+{% endblock %}
