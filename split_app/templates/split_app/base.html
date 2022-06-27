@@ -1,23 +1,55 @@
+{% load bootstrap4 %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shtink-to-fit=no">
+    <title>Split Saventic</title>
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
 </head>
 <body>
-    <p>
-        <a href="{% url 'split_app:index' %}">Split App</a>
-        <a href="{% url 'split_app:Transactions' %}">List of transactions</a>
-        {% if user.is_authenticated %}
-            Witaj, {{ user.username }}
-            <a href="{% url 'users:logout' %}">Wyloguj sie</a>
-        {% else %}
-            <a href="{% url 'users:register' %}">Zarejestruj się</a>
-            <a href="{% url 'users:login' %}">Zaloguj się</a>
-        {% endif %}
-    </p>
-{% block content %}
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 border:none">
+        <a class="navbar-brand" href="{% url 'split_app:index' %}">Split App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'split_app:Transactions' %}">Lista zadłużeń</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <span class="navbar-text">Witaj, {{ user.username }}</span>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'users:logout' %}">Wyloguj</a>
+                        </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'users:register' %}">Zarejestruj się</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'users:login' %}">Zaloguj się</a>
+                            </li>
+                    {% endif %}
+                </ul>
+            </div>
+    </nav>
 
-{% endblock content %}
+<main role="main" class="container">
+    <div class="pb-2 mb-2 border-bottom">
+        {% block page_header %}{% endblock page_header %}
+    </div>
+    <div>
+        {% block content %}{% endblock content %}
+    </div>
+
+</main>
 </body>
 </html>
