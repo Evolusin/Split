@@ -1,16 +1,15 @@
 {% extends 'split_app/base.html' %}
 {% block page_header %}
-    <h3>{{ transaction }}</h3>
+    <h3>Split: {{ transaction }}</h3>
 {% endblock page_header %}
 
 {% block content %}
-<p>Split: {{ transaction }}</p>
 
-<p>Obligations:</p>
+
     <p>
     <a href="{% url 'split_app:new_obligation' transaction.id %}"> Dodaj nową należność </a>
     </p>
-
+<p>Naleźności do spłaty:</p>
 <ul>
 {% for oblig in obligations %}
     <div class="card mb-3">
@@ -20,22 +19,15 @@
         </h4>
     <div class="card-body">
             {{ oblig.payment_date }}
-            {{ oblig.value }}
-            {{ oblig.user }}
-            {{ oblig.optional_value }}
+        <br>
+            {{ oblig.value }} zł + {{ oblig.optional_value }} zł
+        <br>
+            Dłuźnik: {{ oblig.user }}
+
+
             {{ oblig.desc|linebreaks }}
     </div>
-    </div>
-{##}
-{#    <li>#}
-{#        <p>{{ oblig.payment_date }}</p>#}
-{#        <p>{{ oblig.value  }} zł</p>#}
-{#        <p>{{ oblig.optional_value }} zł</p>#}
-{#        <p>{{ oblig.desc|linebreaks }}</p>#}
-{#        <p>#}
-{#            <a href = "{% url 'split_app:edit_obligation' oblig.id %}">Edytuj</a>#}
-{#        </p>#}
-{#    </li>#}
+
 {% empty %}
     <p>There is no obligations for this transaction</p>
 {% endfor %}
