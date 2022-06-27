@@ -9,12 +9,12 @@ class TransactionForm(forms.ModelForm):
     t_date = forms.DateField(initial=datetime.today(), label='Kiedy')
     class Meta:
         model = Transaction
-        fields = ['owner','t_desc','t_date']
+        fields = ['t_desc','t_date']
         widgets = {
             't_date': DateInput()
         }
         labels = {
-            'owner':'Kto stawiał?','t_desc':'Za co?'
+            't_desc':'Za co?'
         }
 
 class ObligationForm(forms.ModelForm):

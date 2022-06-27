@@ -23,7 +23,7 @@ class Transaction(models.Model):
 
 
 class Obligation(models.Model):
-    transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE)
+    transaction = models.ForeignKey(Transaction,related_name="obligation", on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     desc = models.TextField()
     value = models.DecimalField(max_digits=6, decimal_places=2)
