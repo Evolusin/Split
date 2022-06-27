@@ -13,9 +13,10 @@
     {% empty %}
         <li><h3>Brak aktywnych splitów do uregulowania</h3></li>
     {% endfor %}
-     {% block page_footer %}
-        {% endblock page_footer %}
+
+
     </ul>
+    <div class="pb-2 mb-2 border-bottom"></div>
 
 
     <h3><a href="{% url 'split_app:new_transaction' %}">Dodaj nowego splita</a></h3>
