@@ -22,14 +22,14 @@
         <br>
             {{ oblig.value }} zł + {{ oblig.optional_value }} zł
         <br>
-            Dłuźnik: {{ oblig.user }}
+            Dłużnik: {{ oblig.user }}
 
 
             {{ oblig.desc|linebreaks }}
     </div>
 
 {% empty %}
-    <p>There is no obligations for this transaction</p>
+    <p>Na ten moment nie ma tu żadnych zaległych rzeczy do spłacenia</p>
 {% endfor %}
 </ul>
 {% endblock %}
