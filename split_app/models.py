@@ -19,8 +19,7 @@ class Transaction(models.Model):
     t_status = models.CharField(default=c.new, editable=False, max_length=16)
 
     def __str__(self):
-        nl = '\n'
-        return f"{self.t_date} - {self.owner} '<br>' {self.t_desc}"
+        return f"{self.owner} - {self.t_date} - {self.t_desc}"
 
 
 class Obligation(models.Model):
