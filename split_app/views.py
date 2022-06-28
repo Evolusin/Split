@@ -11,7 +11,8 @@ def index(req):
 @login_required
 def transactions(req):
     "Show all transactions assinget to owner/user"
-    transactions = Transaction.objects.filter(Q(obligation__user=req.user) | (Q(obligation__isnull=True)
+    transactions = Transaction.objects.filter(Q(obligation__user=req.user)
+                                              | ((Q(obligation__isnull=True) & Q(owner = req.user))
                                               | Q(owner = req.user))).distinct()
     owner = Transaction.owner
     t_desc = Transaction.t_desc
