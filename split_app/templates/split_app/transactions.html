@@ -4,12 +4,15 @@
 {% endblock page_header %}
 
 {% block content %}
-
+{% load i18n %}
     <ul>
     {% for trans in transactions %}
-            <li><h3>
-            <a href="{% url 'split_app:transaction' trans.id %}">{{ trans }}</a>
-            </h3></li>
+            <li><h4>
+                {% language 'pl' %}
+            <a href="{% url 'split_app:transaction' trans.id %}">{{ trans.owner }} - {{ trans.t_date }}
+            <br>Za: {{ trans.t_desc }}</a>
+                {% endlanguage %}
+            </h4></li>
     {% empty %}
         <li><h3>Brak aktywnych splitów do uregulowania</h3></li>
     {% endfor %}

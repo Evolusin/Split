@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.db.models import Q
+from django.db.models import Q, F
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from .models import Transaction, Obligation
@@ -10,9 +10,12 @@ def index(req):
 
 @login_required
 def transactions(req):
-    "Show all transactions"
-    transactions = Transaction.objects.filter(Q(obligation__user=req.user) | Q(obligation__isnull=True))
-    context = {'transactions':transactions}
+    "Show all transactions assinget to owner/user"
+    transactions = Transaction.objects.filter(Q(obligation__user=req.user) | (Q(obligation__isnull=True)
+                                              | Q(owner = req.user))).distinct()
+    owner = Transaction.owner
+    t_desc = Transaction.t_desc
+    context = {'transactions':transactions, 'owner':owner,'t_desc':t_desc}
     return render(req, 'split_app/transactions.html', context)
 
 @login_required

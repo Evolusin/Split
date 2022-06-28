@@ -4,28 +4,28 @@
 {% endblock page_header %}
 
 {% block content %}
+    {% load i18n %}
 
 
     <p>
     <a href="{% url 'split_app:new_obligation' transaction.id %}"> Dodaj nową należność </a>
     </p>
-<p>Naleźności do spłaty:</p>
+<p>Należności do spłaty:</p>
 <ul>
 {% for oblig in obligations %}
     <div class="card mb-3">
         <h4 class="card-header">
-            {{ transaction.t_date}}
+        {% language 'pl' %}
+            {{ oblig.user }}
+        {% endlanguage %}
             <small><a href="{% url 'split_app:edit_obligation' transaction.id %}">Edytuj należność</a> </small>
         </h4>
     <div class="card-body">
-            {{ oblig.payment_date }}
-        <br>
-            {{ oblig.value }} zł + {{ oblig.optional_value }} zł
-        <br>
-            Dłużnik: {{ oblig.user }}
+{#        <br>#}
+           Wartość -  {{ oblig.suma }} zł
+{#        <br>#}
+{#            Dłużnik: {{ oblig.user }}#}
 
-
-            {{ oblig.desc|linebreaks }}
     </div>
 
 {% empty %}
