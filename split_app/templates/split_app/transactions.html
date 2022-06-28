@@ -4,7 +4,10 @@
 {% endblock page_header %}
 
 {% block content %}
-{% load i18n %}
+    <br>
+    <h3><a href="{% url 'split_app:new_transaction' %}" class="btn btn-outline-primary btn-lg">Dodaj nowego splita</a></h3>
+    <br>
+    {% load i18n %}
     <ul>
     {% for trans in transactions %}
             <li><h4>
@@ -22,7 +25,6 @@
     <div class="pb-2 mb-2 border-bottom"></div>
 
 
-    <h3><a href="{% url 'split_app:new_transaction' %}">Dodaj nowego splita</a></h3>
 {% endblock %}
 {#    {% block page_footer %}#}
 {#         <h3><a href="{% url 'split_app:new_transaction' %}">Dodaj nowego splita</a></h3>#}

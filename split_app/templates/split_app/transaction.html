@@ -8,9 +8,9 @@
 
 
     <p>
-    <a href="{% url 'split_app:new_obligation' transaction.id %}"> Dodaj nową należność </a>
+    <a href="{% url 'split_app:new_obligation' transaction.id %}" class="btn btn-outline-primary"> Dodaj nową należność </a>
     </p>
-<p>Należności do spłaty:</p>
+<h5 class="display-5">Należności do spłaty:</h5>
 <ul>
 {% for oblig in obligations %}
     <div class="card mb-3">
@@ -18,7 +18,9 @@
         {% language 'pl' %}
             {{ oblig.user }}
         {% endlanguage %}
-            <small><a href="{% url 'split_app:edit_obligation' transaction.id %}">Edytuj należność</a> </small>
+            <small><a href="{% url 'split_app:edit_obligation' transaction.id %}" class="btn btn-outline-primary">Edytuj należność</a> </small>
+            <small><a href="{% url 'split_app:pay_obligation' oblig.id %}" class="btn btn-outline-success">Spłać należność</a> </small>
+            </a>
         </h4>
     <div class="card-body">
 {#        <br>#}

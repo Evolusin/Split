@@ -23,7 +23,9 @@ def transactions(req):
 def transaction(req, transaction_id):
     """Show single transaction"""
     transaction = Transaction.objects.get(id=transaction_id)
-    obligations = Obligation.objects.filter(transaction=transaction_id)
+    obligations = Obligation.objects.filter(
+        Q(transaction=transaction_id) & Q(o_status='New')
+    )
     context = {'transaction': transaction, 'obligations':obligations}
     return render(req, 'split_app/transaction.html', context)
 
@@ -82,6 +84,16 @@ def edit_obligation(request, obligation_id):
 
     context = {'obliagtion':obligation,'transaction':transaction, 'form':form}
     return render(request,'split_app/edit_obligation.html', context)
+
+def pay_obligation(request, obligation_id):
+    """Pays the obligations. Only user who is in debt can pay for it"""
+    obligation = Obligation.objects.get(id=obligation_id)
+    transaction =  obligation.transaction
+
+    obligation.o_status = 'Done'
+    obligation.save(update_fields=['o_status'])
+
+    return redirect('split_app:Transactions')
 
 
 
