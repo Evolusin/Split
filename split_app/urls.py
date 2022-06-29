@@ -9,5 +9,5 @@ urlpatterns = [
     path('new_transaction/', views.new_transaction, name='new_transaction'),
     path('new_obligation/<int:transaction_id>/', views.new_obligation, name='new_obligation'),
     path('edit_obligation/<int:obligation_id>/', views.edit_obligation, name='edit_obligation'),
-    path('pay_obligation/<int:obligation_id>', views.pay_obligation, name='pay_obligation')
+    path('pay_obligation/<int:obligation_id>/<int:transaction_id>', views.pay_obligation, name='pay_obligation')
 ]

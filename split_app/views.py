@@ -11,9 +11,10 @@ def index(req):
 @login_required
 def transactions(req):
     "Show all transactions assinget to owner/user"
-    transactions = Transaction.objects.filter(Q(obligation__user=req.user)
+    transactions = Transaction.objects.filter(((Q(obligation__user=req.user) & Q(obligation__o_status='New'))
                                               | ((Q(obligation__isnull=True) & Q(owner = req.user))
-                                              | Q(owner = req.user))).distinct()
+                                                 | Q(owner = req.user)) & Q(t_status='New'))
+                                              ).distinct()
     owner = Transaction.owner
     t_desc = Transaction.t_desc
     context = {'transactions':transactions, 'owner':owner,'t_desc':t_desc}
@@ -85,13 +86,17 @@ def edit_obligation(request, obligation_id):
     context = {'obliagtion':obligation,'transaction':transaction, 'form':form}
     return render(request,'split_app/edit_obligation.html', context)
 
-def pay_obligation(request, obligation_id):
+def pay_obligation(request, obligation_id, transaction_id):
     """Pays the obligations. Only user who is in debt can pay for it"""
     obligation = Obligation.objects.get(id=obligation_id)
-    transaction =  obligation.transaction
-
+    transaction = Transaction.objects.get(id=transaction_id)
+    o = Obligation.objects.filter(Q(transaction_id= transaction.id) & Q(o_status='New'))
     obligation.o_status = 'Done'
+    transaction.t_status = 'Done'
     obligation.save(update_fields=['o_status'])
+    if not o:
+        print("Jestem ostatni")
+        transaction.save(update_fields=['t_status'])
 
     return redirect('split_app:Transactions')
 
