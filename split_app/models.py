@@ -6,9 +6,7 @@ from django.contrib.auth.models import User
 import split_app.choices as c
 
 # Create your models here.
-# class Status(models.IntegerChoices):
 
-# status = ((0, 'New'), (1, 'Done'))
 
 
 class Transaction(models.Model):
