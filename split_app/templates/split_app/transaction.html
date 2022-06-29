@@ -18,7 +18,9 @@
         {% language 'pl' %}
             {{ oblig.user }}
         {% endlanguage %}
+        &nbsp;
             <small><a href="{% url 'split_app:edit_obligation' transaction.id %}" class="btn btn-outline-primary">Edytuj należność</a> </small>
+            &nbsp;
             <small><a href="{% url 'split_app:pay_obligation' oblig.id transaction.id %}" class="btn btn-outline-success">Spłać należność</a> </small>
             </a>
         </h4>

@@ -86,6 +86,7 @@ def edit_obligation(request, obligation_id):
     context = {'obliagtion':obligation,'transaction':transaction, 'form':form}
     return render(request,'split_app/edit_obligation.html', context)
 
+@login_required
 def pay_obligation(request, obligation_id, transaction_id):
     """Pays the obligations. Only user who is in debt can pay for it"""
     obligation = Obligation.objects.get(id=obligation_id)
