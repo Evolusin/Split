@@ -1,12 +1,13 @@
 {% extends 'split_app/base.html' %}
-
+{% load bootstrap4 %}
 {% block content %}
-<p>Dodaj nowego splita</p>
-
-    <form action="{% url 'split_app:new_transaction' %}" method='post'>
+<h5 class="display-5">Dodaj nowego splita</h5>
+    <form action="{% url 'split_app:new_transaction' %}" method='post' role="form" class="form col-4">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button name="submit">Add transaction</button>
+{#        {% bootstrap_label form label_for="t_desc" %}#}
+        {% bootstrap_form form %}
+{#    {{ form.as_p }}#}
+    <button name="submit" class="btn btn-outline-primary">Add transaction</button>
     </form>
 
 

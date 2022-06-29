@@ -11,10 +11,10 @@ class TransactionForm(forms.ModelForm):
         model = Transaction
         fields = ['t_desc','t_date']
         widgets = {
-            't_date': DateInput()
+            't_date': DateInput(), 't_desc':forms.Textarea(attrs={'rows':2, 'cols':40})
         }
         labels = {
-            't_desc':'Za co?'
+            't_desc':'Za co'
         }
 
 class ObligationForm(forms.ModelForm):
