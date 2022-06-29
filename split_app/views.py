@@ -95,7 +95,6 @@ def pay_obligation(request, obligation_id, transaction_id):
     transaction.t_status = 'Done'
     obligation.save(update_fields=['o_status'])
     if not o:
-        print("Jestem ostatni")
         transaction.save(update_fields=['t_status'])
 
     return redirect('split_app:Transactions')
