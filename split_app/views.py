@@ -71,8 +71,11 @@ def new_obligation(request, transaction_id):
 @login_required
 def edit_obligation(request, obligation_id):
     """Edits obligation"""
-    obligation = Obligation.objects.get(id=obligation_id)
+    """sprawdz http4 get"""
+    # obligation = Obligation.objects.get(id=obligation_id)
+    obligation = Obligation.objects.prefetch_related('transaction').get(id=obligation_id)
     transaction = obligation.transaction
+
     if transaction.owner != request.user:
         raise Http404
     if request.method != 'POST':
