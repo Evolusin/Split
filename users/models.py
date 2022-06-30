@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from phonenumber_field.modelfields import PhoneNumberField
+# from phonenumber_field.modelfields import PhoneNumberField
 # from django.http import HttpResponseRedirect
 # from django.urls import reverse
 
@@ -20,4 +20,4 @@ class Profile(models.Model):
     first_name = models.CharField(max_length=20, null=False, blank=False)
     last_name = models.CharField(max_length=20, null=False, blank=False)
     email = models.CharField(max_length=30, null=False, blank=False)
-    phone = PhoneNumberField(null=True, blank=True, unique=True)
+    # phone = PhoneNumberField(null=True, blank=True, unique=True)
