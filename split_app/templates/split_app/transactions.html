@@ -8,20 +8,26 @@
     <h3><a href="{% url 'split_app:new_transaction' %}" class="btn btn-outline-primary btn-lg">Dodaj nowego splita</a></h3>
     <br>
     {% load i18n %}
-    <ul>
+
+    <table class="table table-bordered table-striped">
+    <TH>Kto stawiał?</TH><TH>Z kiedy?</TH><TH>Za co?</TH>
     {% for trans in transactions %}
-            <li><h4>
+            <h4>
                 {% language 'pl' %}
-            <a href="{% url 'split_app:transaction' trans.id %}">{{ trans.owner }} - {{ trans.t_date }}
-            <br>Za: {{ trans.t_desc }}</a>
+
+    <TR>
+            <TD><a href="{% url 'split_app:transaction' trans.id %}">{{ trans.owner }}</a></TD>
+            <TD><a href="{% url 'split_app:transaction' trans.id %}">{{ trans.t_date }}</a></TD>
+            <TD><a href="{% url 'split_app:transaction' trans.id %}">{{ trans.t_desc }}</a></TD>
                 {% endlanguage %}
-            </h4></li>
+    </TR>
+            </h4>
     {% empty %}
         <h3>Brak aktywnych splitów do uregulowania</h3>
     {% endfor %}
 
 
-    </ul>
+
     <div class="pb-2 mb-2 border-bottom"></div>
 
 
