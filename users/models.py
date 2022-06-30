@@ -1,6 +1,8 @@
 from django.db import models
-from django.http import HttpResponseRedirect
-from django.urls import reverse
+from django.contrib.auth.models import User
+from phonenumber_field.modelfields import PhoneNumberField
+# from django.http import HttpResponseRedirect
+# from django.urls import reverse
 
 # Create your models here.
 
@@ -10,3 +12,12 @@ from django.urls import reverse
 #         self.get_response = get_response
 #
 #     def __call__(self, request):
+
+class Profile(models.Model):
+    """Profiles that expands built-in User class in Django.
+     Adds firstnames/lastnames/emails/phone number (used in payment by BLIK)"""
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=20, null=False, blank=False)
+    last_name = models.CharField(max_length=20, null=False, blank=False)
+    email = models.CharField(max_length=30, null=False, blank=False)
+    phone = PhoneNumberField(null=True, blank=True, unique=True)
