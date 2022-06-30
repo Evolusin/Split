@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('split_app', '0005_alter_transaction_t_date_alter_transaction_t_desc'),
+        ("split_app", "0005_alter_transaction_t_date_alter_transaction_t_desc"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='transaction',
-            name='t_date',
+            model_name="transaction",
+            name="t_date",
             field=models.DateField(),
         ),
         migrations.AlterField(
-            model_name='transaction',
-            name='t_desc',
+            model_name="transaction",
+            name="t_desc",
             field=models.TextField(blank=True, null=True),
         ),
     ]

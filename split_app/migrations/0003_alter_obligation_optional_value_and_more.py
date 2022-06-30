@@ -7,18 +7,22 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('split_app', '0002_alter_obligation_o_status_alter_transaction_t_status'),
+        ("split_app", "0002_alter_obligation_o_status_alter_transaction_t_status"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='obligation',
-            name='optional_value',
-            field=models.DecimalField(blank=True, decimal_places=2, max_digits=6, null=True),
+            model_name="obligation",
+            name="optional_value",
+            field=models.DecimalField(
+                blank=True, decimal_places=2, max_digits=6, null=True
+            ),
         ),
         migrations.AlterField(
-            model_name='obligation',
-            name='payment_date',
-            field=models.DateField(blank=True, default=django.utils.timezone.now, null=True),
+            model_name="obligation",
+            name="payment_date",
+            field=models.DateField(
+                blank=True, default=django.utils.timezone.now, null=True
+            ),
         ),
     ]

@@ -6,18 +6,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('split_app', '0001_initial'),
+        ("split_app", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='obligation',
-            name='o_status',
-            field=models.CharField(choices=[('New', 'New'), ('Done', 'Done')], default='New', max_length=16),
+            model_name="obligation",
+            name="o_status",
+            field=models.CharField(
+                choices=[("New", "New"), ("Done", "Done")], default="New", max_length=16
+            ),
         ),
         migrations.AlterField(
-            model_name='transaction',
-            name='t_status',
-            field=models.CharField(default='New', editable=False, max_length=16),
+            model_name="transaction",
+            name="t_status",
+            field=models.CharField(default="New", editable=False, max_length=16),
         ),
     ]

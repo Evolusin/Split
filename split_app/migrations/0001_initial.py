@@ -16,26 +16,70 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Transaction',
+            name="Transaction",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('t_desc', models.TextField(blank=True, null=True)),
-                ('t_date', models.DateField()),
-                ('t_status', models.CharField(default='NEW', editable=False, max_length=16)),
-                ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("t_desc", models.TextField(blank=True, null=True)),
+                ("t_date", models.DateField()),
+                (
+                    "t_status",
+                    models.CharField(default="NEW", editable=False, max_length=16),
+                ),
+                (
+                    "owner",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Obligation',
+            name="Obligation",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('desc', models.TextField()),
-                ('value', models.DecimalField(decimal_places=2, max_digits=6)),
-                ('optional_value', models.DecimalField(decimal_places=2, max_digits=6)),
-                ('o_status', models.CharField(choices=[('NEW', 'New'), ('DONE', 'Done')], default='NEW', max_length=16)),
-                ('payment_date', models.DateField(default=django.utils.timezone.now)),
-                ('transaction', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='split_app.transaction')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("desc", models.TextField()),
+                ("value", models.DecimalField(decimal_places=2, max_digits=6)),
+                ("optional_value", models.DecimalField(decimal_places=2, max_digits=6)),
+                (
+                    "o_status",
+                    models.CharField(
+                        choices=[("NEW", "New"), ("DONE", "Done")],
+                        default="NEW",
+                        max_length=16,
+                    ),
+                ),
+                ("payment_date", models.DateField(default=django.utils.timezone.now)),
+                (
+                    "transaction",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="split_app.transaction",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]
