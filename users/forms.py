@@ -8,5 +8,5 @@ class UPasswordChange(forms.ModelForm):
     """Form that lets user change their password"""
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ['username','password']
         # widgets = {"desc": forms.Textarea(attrs={"rows": 2, "cols": 20})}

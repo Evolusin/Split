@@ -13,7 +13,7 @@ def upassword_change(request):
     """Allows users to change his password"""
     # print(user)
     if request.method != 'POST':
-        form = UPasswordChange(request.user)
+        form = UPasswordChange(request.POST)
     else:
         form = UPasswordChange(request.POST)
         if form.is_valid():
