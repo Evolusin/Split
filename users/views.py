@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 def upassword_change(request):
     """Allows users to change his password"""
     # print(user)
-    # user =
+    user = request.user.id
     if request.method != 'POST':
         form = UPasswordChange(request.POST)
     else:
@@ -20,5 +20,5 @@ def upassword_change(request):
             messages.success(request,'Hasło zmienione')
             return redirect('split_app:upassword_change')
 
-    context = {'form': form}
+    context = {'form': form, 'user':user}
     return render(request, 'registration/upassword_change.html', context)
