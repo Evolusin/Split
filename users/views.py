@@ -22,4 +22,4 @@ def upassword_change(request):
             return redirect('split_app:upassword_change')
 
     context = {'form': form}
-    return render(request, 'registration/password_change.html', context)
+    return render(request, 'registration/upassword_change.html', context)
