@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
-from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
-
+from django.contrib.auth.forms import UserCreationForm
+from .forms import UPasswordChange
 
 # Create your views here.
 
@@ -23,15 +23,15 @@ def register(request):
     context = {'form': form}
     return render(request, 'registration/register.html', context)
 
-def password_change(request):
+def upassword_change(request):
     """Allows users to change his password"""
     if request.method != 'POST':
-        form = PasswordChangeForm
+        form = UPasswordChange
     else:
-        form = PasswordChangeForm(data=request.POST)
+        form = UPasswordChange(data=request.POST)
         if form.is_valid():
             password = form.save()
-            return redirect('split_app:index')
+            # return redirect('split_app:index')
 
     context = {'form': form}
     return render(request, 'registration/password_change.html', context)
