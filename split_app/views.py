@@ -71,6 +71,7 @@ def new_obligation(request, transaction_id):
         if form.is_valid():
             new_obligation = form.save(commit=False)
             new_obligation.transaction = transaction
+
             new_obligation.save()
             return redirect("split_app:transaction", transaction_id=transaction_id)
     context = {"transaction": transaction, "form": form}
