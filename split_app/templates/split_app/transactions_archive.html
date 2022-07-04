@@ -1,0 +1,34 @@
+{% extends 'split_app/base.html' %}
+{% block page_header %}
+    <h1>Wszystkie zakończone splity</h1>
+{% endblock page_header %}
+
+{% block content %}
+    <br>
+    <h3><a href="{% url 'split_app:new_transaction' %}" class="btn btn-outline-primary btn-lg">Dodaj nowego splita</a></h3>
+    <br>
+    {% load i18n %}
+
+    <table class="table table-bordered table-striped">
+    <TH>Kto stawiał?</TH><TH>Z kiedy?</TH><TH>Za co?</TH>
+    {% for trans in transactions %}
+            <h4>
+                {% language 'pl' %}
+
+    <TR>
+            <TD><a href="{% url 'split_app:transaction' trans.id %}">{{ trans.owner }}</a></TD>
+            <TD><a href="{% url 'split_app:transaction' trans.id %}">{{ trans.t_date }}</a></TD>
+            <TD><a href="{% url 'split_app:transaction' trans.id %}">{{ trans.t_desc }}</a></TD>
+                {% endlanguage %}
+    </TR>
+            </h4>
+    {% empty %}
+        <h3>Brak zakończonych splitów</h3>
+    {% endfor %}
+
+
+
+    <div class="pb-2 mb-2 border-bottom"></div>
+
+
+{% endblock %}

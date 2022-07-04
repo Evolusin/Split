@@ -24,6 +24,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'split_app:Transactions' %}">Lista zadłużeń</a>
                     </li>
+                    <li>
+                        <a class="nav-link" href="{% url 'split_app:Transactions_archive' %}">Spłacone splity</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     {% if user.is_authenticated %}

@@ -8,6 +8,7 @@
         {% else %}
         <h1 class="display-3">Witaj w aplikacji Split Saventic</h1>
         <p class="lead">Stwórz splita i dodaj ile jest ci dana osoba winna daniny</p>
+        <a class="btn btn-lg btn-primary" href="{% url 'users:login' %}" role="button">Zaloguj się</a>
         &nbsp;
     {% endif %}
         {% if user.is_authenticated %}

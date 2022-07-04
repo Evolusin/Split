@@ -17,7 +17,7 @@ def index(req):
 
 @login_required
 def transactions(req):
-    "Show all transactions assinget to owner/user"
+    "Show all active transactions assign to owner/user"
     transactions = Transaction.objects.filter(
         (
             (Q(obligation__user=req.user) & Q(obligation__o_status="New"))
@@ -29,6 +29,20 @@ def transactions(req):
     t_desc = Transaction.t_desc
     context = {"transactions": transactions, "owner": owner, "t_desc": t_desc}
     return render(req, "split_app/transactions.html", context)
+
+@login_required
+def transactions_archive(req):
+    "Show all finished transactions assigned to owner/user"
+    transactions = Transaction.objects.filter(
+        (
+            ((Q(obligation__isnull=False) & Q(owner=req.user)) | Q(owner=req.user))
+            & Q(t_status="Done")
+        )
+    ).distinct()
+    owner = Transaction.owner
+    t_desc = Transaction.t_desc
+    context = {"transactions": transactions, "owner": owner, "t_desc": t_desc}
+    return render(req, "split_app/transactions_archive.html", context)
 
 
 @login_required

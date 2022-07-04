@@ -5,6 +5,7 @@ app_name = "split_app"
 urlpatterns = [
     path("", views.index, name="index"),
     path("transactions/", views.transactions, name="Transactions"),
+    path("transactions_archive/", views.transactions_archive, name="Transactions_archive"),
     path("transactions/<int:transaction_id>/", views.transaction, name="transaction"),
     path("new_transaction/", views.new_transaction, name="new_transaction"),
     path(
