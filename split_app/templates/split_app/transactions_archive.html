@@ -16,7 +16,7 @@
                 {% language 'pl' %}
 
     <TR>
-            <TD><a href="{% url 'split_app:transaction_a' trans.id %}">{{ trans.owner }}</a></TD>
+            <TD><a href="{% url 'split_app:transaction_a' trans.id %}">{{ trans.first_name }}</a></TD>
             <TD><a href="{% url 'split_app:transaction_a' trans.id %}">{{ trans.t_date }}</a></TD>
             <TD><a href="{% url 'split_app:transaction_a' trans.id %}">{{ trans.t_desc }}</a></TD>
                 {% endlanguage %}

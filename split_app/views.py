@@ -27,7 +27,8 @@ def transactions(req):
     ).distinct()
     owner = Transaction.owner
     t_desc = Transaction.t_desc
-    context = {"transactions": transactions, "owner": owner, "t_desc": t_desc}
+    profile = Profile.objects.get(user=req.user)
+    context = {"transactions": transactions, "owner": owner, "t_desc": t_desc, "profile": profile}
     return render(req, "split_app/transactions.html", context)
 
 @login_required
@@ -41,7 +42,8 @@ def transactions_archive(req):
     ).distinct()
     owner = Transaction.owner
     t_desc = Transaction.t_desc
-    context = {"transactions": transactions, "owner": owner, "t_desc": t_desc}
+    profile = Profile.user
+    context = {"transactions": transactions, "owner": owner, "t_desc": t_desc, "profile": profile}
     return render(req, "split_app/transactions_archive.html", context)
 
 
@@ -52,7 +54,8 @@ def transaction(req, transaction_id):
     obligations = Obligation.objects.filter(
         Q(transaction=transaction_id) & Q(o_status="New")
     )
-    context = {"transaction": transaction, "obligations": obligations}
+    profile = Profile.objects.get(user=req.user)
+    context = {"transaction": transaction, "obligations": obligations, 'profile': profile}
     return render(req, "split_app/transaction.html", context)
 
 @login_required
