@@ -3,12 +3,17 @@ from django.db.models import Q, F
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from .models import Transaction, Obligation
+from users.models import Profile
 from .forms import TransactionForm, ObligationForm
 
 # Create your views here.
 def index(req):
-    return render(req, "split_app/index.html")
-
+    if req.user.is_authenticated:
+        profile = Profile.objects.get(user=req.user)
+        context = {"profile":profile}
+        return render(req, "split_app/index.html", context)
+    else:
+        return render(req, "split_app/index.html")
 
 @login_required
 def transactions(req):

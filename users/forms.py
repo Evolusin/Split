@@ -9,5 +9,11 @@ class UPasswordChange(PasswordChangeForm):
 
     class Meta:
         model = User
-        fields = 'old_password'
     #     print('test')
+
+    def __init__(self, *args, **kwargs):
+        super(UPasswordChange, self).__init__(*args, **kwargs)
+
+        self.fields['old_password'].widget.attrs['class'] = 'form-control'
+        self.fields['new_password1'].widget.attrs['class'] = 'form-control'
+        self.fields['new_password2'].widget.attrs['class'] = 'form-control'
