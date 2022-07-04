@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.db.models import Q, F
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from .models import Transaction, Obligation
@@ -27,7 +28,7 @@ def transactions(req):
     ).distinct()
     owner = Transaction.owner
     t_desc = Transaction.t_desc
-    profile = Profile.objects.get(user=req.user)
+    profile = None
     context = {"transactions": transactions, "owner": owner, "t_desc": t_desc, "profile": profile}
     return render(req, "split_app/transactions.html", context)
 
@@ -42,7 +43,7 @@ def transactions_archive(req):
     ).distinct()
     owner = Transaction.owner
     t_desc = Transaction.t_desc
-    profile = Profile.user
+    profile = None
     context = {"transactions": transactions, "owner": owner, "t_desc": t_desc, "profile": profile}
     return render(req, "split_app/transactions_archive.html", context)
 
@@ -54,7 +55,7 @@ def transaction(req, transaction_id):
     obligations = Obligation.objects.filter(
         Q(transaction=transaction_id) & Q(o_status="New")
     )
-    profile = Profile.objects.get(user=req.user)
+    profile = None
     context = {"transaction": transaction, "obligations": obligations, 'profile': profile}
     return render(req, "split_app/transaction.html", context)
 
@@ -65,7 +66,10 @@ def transaction_a(req, transaction_id):
     obligations = Obligation.objects.filter(
         Q(transaction=transaction_id) & Q(o_status="Done")
     )
-    context = {"transaction_a": transaction_a, "obligations": obligations}
+    # profile = Profile.objects.filter(Transaction.owner__Users)
+    # obligation = Obligation.objects.prefetch_related("transaction").get(
+    #     id=obligation_id
+    context = {"transaction_a": transaction_a, "obligations": obligations, 'profile': profile}
     return render(req, "split_app/transaction_a.html", context)
 
 @login_required
