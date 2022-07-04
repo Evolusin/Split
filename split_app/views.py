@@ -55,6 +55,15 @@ def transaction(req, transaction_id):
     context = {"transaction": transaction, "obligations": obligations}
     return render(req, "split_app/transaction.html", context)
 
+@login_required
+def transaction_a(req, transaction_id):
+    """Show single archived transaction"""
+    transaction_a = Transaction.objects.get(id=transaction_id)
+    obligations = Obligation.objects.filter(
+        Q(transaction=transaction_id) & Q(o_status="Done")
+    )
+    context = {"transaction_a": transaction_a, "obligations": obligations}
+    return render(req, "split_app/transaction_a.html", context)
 
 @login_required
 def new_transaction(request):

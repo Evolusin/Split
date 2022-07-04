@@ -5,7 +5,7 @@
 
 {% block content %}
     <br>
-    <h3><a href="{% url 'split_app:new_transaction' %}" class="btn btn-outline-primary btn-lg">Dodaj nowego splita</a></h3>
+{#    <h3><a href="{% url 'split_app:new_transaction' %}" class="btn btn-outline-primary btn-lg">Dodaj nowego splita</a></h3>#}
     <br>
     {% load i18n %}
 
@@ -16,9 +16,9 @@
                 {% language 'pl' %}
 
     <TR>
-            <TD><a href="{% url 'split_app:transaction' trans.id %}">{{ trans.owner }}</a></TD>
-            <TD><a href="{% url 'split_app:transaction' trans.id %}">{{ trans.t_date }}</a></TD>
-            <TD><a href="{% url 'split_app:transaction' trans.id %}">{{ trans.t_desc }}</a></TD>
+            <TD><a href="{% url 'split_app:transaction_a' trans.id %}">{{ trans.owner }}</a></TD>
+            <TD><a href="{% url 'split_app:transaction_a' trans.id %}">{{ trans.t_date }}</a></TD>
+            <TD><a href="{% url 'split_app:transaction_a' trans.id %}">{{ trans.t_desc }}</a></TD>
                 {% endlanguage %}
     </TR>
             </h4>
