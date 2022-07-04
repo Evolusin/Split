@@ -9,7 +9,7 @@ import split_app.choices as c
 class Transaction(models.Model):
     """A transaction that person starts"""
 
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="transaction")
     t_desc = models.TextField(blank=True, null=True)
     t_date = models.DateField()
     t_status = models.CharField(default=c.new, editable=False, max_length=16)
