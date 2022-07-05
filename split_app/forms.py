@@ -1,6 +1,7 @@
 from django import forms
 from .models import Transaction, Obligation
 from datetime import datetime
+from users.models import Profile
 
 
 class DateInput(forms.DateInput):
@@ -23,6 +24,7 @@ class TransactionForm(forms.ModelForm):
 class ObligationForm(forms.ModelForm):
     class Meta:
         model = Obligation
+        # model = Profile
         fields = ["user", "value", "optional_value"]
         labels = {
             "user": "Winny",

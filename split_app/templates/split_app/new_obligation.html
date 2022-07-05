@@ -1,13 +1,14 @@
 {% extends 'split_app/base.html' %}
 {% load bootstrap4 %}
+{% block page_header %}
+    <h3><a href="{% url 'split_app:transaction' transaction.id %}">Split: {{ transaction }}</a></h3>
+{% endblock page_header %}
 {% block content %}
-    <p><a href="{% url 'split_app:transaction' transaction.id %}">{{ transaction }}</a></p>
-
-    <p>Dodaj nową należność:</p>
+   <h5 class="display-5">Dodaj nową należność</h5>
     <form action="{% url 'split_app:new_obligation' transaction.id %}" method='post'>
     {% csrf_token %}
      {% bootstrap_form form %}
-    <button name="submit">Zapisz</button>
+    <button name="submit" class="btn btn-outline-primary">Zapisz</button>
     </form>
 
 
