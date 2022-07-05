@@ -13,10 +13,10 @@
 <h5 class="display-5">Należności do spłaty:</h5>
 <ul>
 {% for oblig in obligations %}
-    <div class="card mb-3">
+    <div class="card mb-3 text-white bg-success">
         <h4 class="card-header">
         {% language 'pl' %}
-            {{ profile.first_name }}
+            {{ oblig.user.profile.first_name }}
         {% endlanguage %}
         </h4>
     <div class="card-body">

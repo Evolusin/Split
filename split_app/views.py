@@ -28,7 +28,7 @@ def transactions(req):
     ).distinct()
     owner = Transaction.owner
     t_desc = Transaction.t_desc
-    profile = None
+    profile = Profile.user
     context = {"transactions": transactions, "owner": owner, "t_desc": t_desc, "profile": profile}
     return render(req, "split_app/transactions.html", context)
 
@@ -38,13 +38,13 @@ def transactions_archive(req):
     """Show all finished transactions assigned to owner/user"""
     transactions = Transaction.objects.filter(
         (
-            ((Q(obligation__isnull=False) & Q(owner=req.user)) | Q(owner=req.user))
-            & Q(t_status="Done")
+            (((Q(obligation__isnull=False) & Q(owner=req.user)) | Q(owner=req.user))
+            & Q(t_status="Done")) | (Q(obligation__user=req.user) & Q(obligation__o_status='Done'))
         )
     ).distinct()
     owner = Transaction.owner
     t_desc = Transaction.t_desc
-    profile = User.objects.select_related('transaction','profile').filter(obligation__transaction__owner_id=Profile.user)
+    profile = Profile.user
     context = {"transactions": transactions, "owner": owner, "t_desc": t_desc, "profile": profile}
     return render(req, "split_app/transactions_archive.html", context)
 
@@ -56,7 +56,7 @@ def transaction(req, transaction_id):
     obligations = Obligation.objects.filter(
         Q(transaction=transaction_id) & Q(o_status="New")
     )
-    profile = None
+    profile = Profile.user
     context = {"transaction": transaction, "obligations": obligations, 'profile': profile}
     return render(req, "split_app/transaction.html", context)
 
@@ -67,9 +67,7 @@ def transaction_a(req, transaction_id):
     obligations = Obligation.objects.filter(
         Q(transaction=transaction_id) & Q(o_status="Done")
     )
-    # profile = Profile.objects.select_related('user').filter(user__obligation=Profile.)
-    # obligation = Obligation.objects.prefetch_related("transaction").get(
-    #     id=obligation_id
+    profile = Profile.user
     context = {"transaction_a": transaction_a, "obligations": obligations, 'profile': profile}
     return render(req, "split_app/transaction_a.html", context)
 

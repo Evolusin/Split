@@ -16,7 +16,8 @@
     <div class="card mb-3">
         <h4 class="card-header">
         {% language 'pl' %}
-            {{ oblig.user }}
+            {{ oblig.user.profile.first_name }}
+            {{ oblig.user.profile.last_name }}
         {% endlanguage %}
         &nbsp;
             <small><a href="{% url 'split_app:edit_obligation' oblig.id %}" class="btn btn-outline-primary">Edytuj należność</a> </small>
