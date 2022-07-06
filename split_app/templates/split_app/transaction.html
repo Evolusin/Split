@@ -23,9 +23,19 @@
             <small><a href="{% url 'split_app:edit_obligation' oblig.id %}" class="btn btn-outline-primary">Edytuj należność</a> </small>
             &nbsp;
             <small><a href="{% url 'split_app:pay_obligation' oblig.id transaction.id %}" class="btn btn-outline-success">Spłać należność</a> </small>
+            &nbsp;
+            <button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#platnosc_{{ forloop.counter }}">
+                Informacje o płatności
+            </button>
+            <div class="alert alert-primary collapse" id="platnosc_{{ forloop.counter }}">
+                <br>
+                Płatność blik na numer: {{ oblig.user.profile.phone }}
+                <br>
+                <br>
+              </div>
         </h4>
     <div class="card-body">
-           Wartość -  {{ oblig.suma }} zł
+          <p class="font-weight-bold" style="display:inline">Wartość</p> -  {{ oblig.suma }} zł
     </div>
     </div>
 {% empty %}
