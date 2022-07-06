@@ -61,6 +61,7 @@ def transaction(req, transaction_id):
     context = {"transaction": transaction, "obligations": obligations, 'profile': profile}
     return render(req, "split_app/transaction.html", context)
 
+
 @login_required
 def transaction_a(req, transaction_id):
     """Show single archived transaction"""
@@ -71,6 +72,7 @@ def transaction_a(req, transaction_id):
     profile = Profile.user
     context = {"transaction_a": transaction_a, "obligations": obligations, 'profile': profile}
     return render(req, "split_app/transaction_a.html", context)
+
 
 @login_required
 def new_transaction(request):
