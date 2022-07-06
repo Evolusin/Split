@@ -20,16 +20,18 @@
             {{ oblig.user.profile.last_name }}
         {% endlanguage %}
         &nbsp;
-            <small><a href="{% url 'split_app:edit_obligation' oblig.id %}" class="btn btn-outline-primary">Edytuj należność</a> </small>
+            <a href="{% url 'split_app:edit_obligation' oblig.id %}" class="btn btn-outline-primary">Edytuj należność</a>
             &nbsp;
-            <small><a href="{% url 'split_app:pay_obligation' oblig.id transaction.id %}" class="btn btn-outline-success">Spłać należność</a> </small>
+            <a href="{% url 'split_app:pay_obligation' oblig.id transaction.id %}" class="btn btn-outline-success">Spłać należność</a>
             &nbsp;
             <button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#platnosc_{{ forloop.counter }}">
                 Informacje o płatności
             </button>
             <div class="alert alert-primary collapse" id="platnosc_{{ forloop.counter }}">
                 <br>
-                Płatność blik na numer: {{ oblig.user.profile.phone }}
+                Konto Bankowe: {{ oblig.user.profile.bank }}
+                <hr>
+                Blik na numer: {{ oblig.user.profile.phone }}
                 <br>
                 <br>
               </div>

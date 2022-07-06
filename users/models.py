@@ -23,14 +23,11 @@ class Profile(models.Model):
     email = models.CharField(max_length=50, null=False, blank=False)
     pass_change_force = models.BooleanField(default=True)
     phone = models.IntegerField(null=True, blank=True, unique=True)
+    bank = models.CharField(default='-', max_length=255)
 
     def __str__(self):
         return f"{self.user} - {self.first_name} - {self.last_name} - {self.email}"
 
-    def spaced_format(value):
-        left = int(value / 10000)
-        right = value % 10000
-        return '{:03} {:04}'.format(left, right)
 
 class UUser(User):
     Psignal = models.BooleanField(default=False)
