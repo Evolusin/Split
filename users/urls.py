@@ -8,9 +8,8 @@ app_name = 'users'
 urlpatterns = [
     # Default auth urls
     path('', include('django.contrib.auth.urls')),
-    # Login user
-    # path('login/', views.login, name='login' ),
     # Password change
     path('upassword_change/', views.upassword_change, name='upassword_change'),
-
+    # Get profile info
+    path('profile/<int:profile_id>', views.profile, name='profile')
 ]
