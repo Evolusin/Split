@@ -7,7 +7,7 @@ from .models import Profile
 
 # Create your views here.
 
-# def login(login)
+
 @login_required
 def upassword_change(request):
     """Allows users to change his password"""
