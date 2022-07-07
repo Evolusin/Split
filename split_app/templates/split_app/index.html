@@ -15,6 +15,8 @@
             <a class="btn btn-lg btn-primary" href="{% url 'split_app:new_transaction' %}" role="button">Dodaj nowego splita &raquo;</a>
             &nbsp;
             <a class="btn btn-lg btn-primary" href="{% url 'users:upassword_change' %}" role="button">Reset hasła &raquo;</a>
+            &nbsp;
+            <a class="btn btn-lg btn-primary" href="{% url 'users:profile' profile.user_id%}" role="button">Edytuj swój profil &raquo;</a>
         {% endif %}
     </div>
 {% endblock page_header %}

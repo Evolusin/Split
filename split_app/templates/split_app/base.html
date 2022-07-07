@@ -34,6 +34,9 @@
                             <span class="navbar-text">Witaj, {{ user.username }}</span>
                         </li>
                         <li class="nav-item">
+{#                            <a class="nav-link" href="{% url 'users:profile' profile.user_id %}">Mój profil</a>#}
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{% url 'users:logout' %}">Wyloguj</a>
                         </li>
                         {% else %}

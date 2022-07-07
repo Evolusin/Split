@@ -20,17 +20,14 @@ def index(req):
 @login_required
 def transactions(req):
     "Show all active transactions assign to owner/user"
-    transactions = Transaction.objects.filter(
+    transactions_view = Transaction.objects.filter(
         (
             (Q(obligation__user=req.user) & Q(obligation__o_status="New"))
             | ((Q(obligation__isnull=True) & Q(owner=req.user)) | Q(owner=req.user))
             & Q(t_status="New")
         )
     ).distinct()
-    owner = Transaction.owner
-    t_desc = Transaction.t_desc
-    profile = Profile.user
-    context = {"transactions": transactions, "owner": owner, "t_desc": t_desc, "profile": profile}
+    context = {"transactions": transactions_view}
     return render(req, "split_app/transactions.html", context)
 
 
@@ -58,7 +55,7 @@ def transaction(req, transaction_id):
         Q(transaction=transaction_id) & Q(o_status="New")
     )
     profile = Profile.user
-    context = {"transaction": transaction, "obligations": obligations, 'profile': profile}
+    context = {"transaction": transaction, "obligations": obligations}
     return render(req, "split_app/transaction.html", context)
 
 

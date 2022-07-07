@@ -11,5 +11,5 @@ urlpatterns = [
     # Password change
     path('upassword_change/', views.upassword_change, name='upassword_change'),
     # Get profile info
-    path('profile/<int:profile_id>', views.profile, name='profile')
+    path('profile/<int:user_id>', views.profile, name='profile')
 ]

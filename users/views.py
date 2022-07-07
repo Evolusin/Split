@@ -26,14 +26,11 @@ def upassword_change(request):
     return render(request, 'registration/upassword_change.html', context)
 
 @login_required
-def profile(request, profile_id):
+def profile(request, user_id):
     """Shows profile"""
-    profile = Profile.objects.get(user=request.user, profile_id=request.user.id)
-    if profile.user != request.user:
-        raise Http404
-    if request.method != "POST":
-        form = None
-
+    profile_var = Profile.objects.get(user=request.user, user_id=request.user.id)
+    context = {"profile": profile_var}
+    return render(request, "registration/profile.html", context)
 # @login_required
 # def edit_profile(request):
 #     """Edit profile by user who is currently logged"""

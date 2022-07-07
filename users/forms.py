@@ -18,7 +18,3 @@ class UPasswordChange(PasswordChangeForm):
         self.fields['new_password2'].widget.attrs['class'] = 'form-control'
 
 
-class ShowProfiles(forms.ModelForm):
-    class Meta:
-        model = Profile
-        fields = '__all__'
