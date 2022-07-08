@@ -31,6 +31,12 @@ def profile(request, user_id):
     profile_var = Profile.objects.get(user=request.user, user_id=request.user.id)
     context = {"profile": profile_var}
     return render(request, "registration/profile.html", context)
+
+def editprofile(request, user_id):
+    """Allows to edit profile by loggged user"""
+    eprofile = Profile.objects.get(user=request.user, user_id=request.user.id)
+
+
 # @login_required
 # def edit_profile(request):
 #     """Edit profile by user who is currently logged"""
