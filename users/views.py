@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import UPasswordChange
+from .forms import UPasswordChange, EditProfile
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from .models import Profile
@@ -35,7 +35,16 @@ def profile(request, user_id):
 def editprofile(request, user_id):
     """Allows to edit profile by loggged user"""
     eprofile = Profile.objects.get(user=request.user, user_id=request.user.id)
+    if request.method != "POST":
+        form = EditProfile(instance=eprofile)
+    else:
+        form = EditProfile(instance=eprofile, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("users:profile", user_id=eprofile.user_id)
 
+    context = {"eprofile":eprofile}
+    # return render(request, "registration/profile.html")
 
 # @login_required
 # def edit_profile(request):

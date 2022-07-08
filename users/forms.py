@@ -20,3 +20,4 @@ class UPasswordChange(PasswordChangeForm):
 class EditProfile(forms.ModelForm):
     class Meta:
         model=Profile
+        fields = '__all__'
