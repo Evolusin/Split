@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.db.models import Q, F
-from django.contrib.auth.models import User
-from django.contrib import messages
+from django.utils import timezone, dateformat
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from .models import Transaction, Obligation
@@ -141,8 +140,9 @@ def pay_obligation(request, obligation_id, transaction_id):
     transaction = Transaction.objects.get(id=transaction_id)
     o = Obligation.objects.filter(Q(transaction_id=transaction.id) & Q(o_status="New"))
     obligation.o_status = "Done"
+    obligation.payment_date = dateformat.format(timezone.now(), 'Y-m-d')
     transaction.t_status = "Done"
-    obligation.save(update_fields=["o_status"])
+    obligation.save(update_fields=["o_status", "payment_date"])
     if not o:
         transaction.save(update_fields=["t_status"])
 

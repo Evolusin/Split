@@ -29,9 +29,7 @@ class Obligation(models.Model):
         max_digits=6, decimal_places=2, null=True, blank=True
     )
     o_status = models.CharField(default=c.new, choices=c.status, max_length=16)
-    payment_date = models.DateField(
-        default=django.utils.timezone.now, null=True, blank=True
-    )
+    payment_date = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.desc} - {self.value} - {self.payment_date} - {self.user}"
