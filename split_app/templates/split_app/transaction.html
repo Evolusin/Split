@@ -9,6 +9,17 @@
 
     <p>
     <a href="{% url 'split_app:new_obligation' transaction.id %}" class="btn btn-outline-primary"> Dodaj nową należność </a>
+    <button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#platnosc_{{ forloop.counter }}">
+                Informacje o płatności
+            </button>
+            <div class="alert alert-primary collapse" id="platnosc_{{ forloop.counter }}">
+                <br>
+                Konto Bankowe: {{ transaction.owner.profile.bank }}
+                <hr>
+                Blik na numer: {{ transaction.owner.profile.phone }}
+                <br>
+                <br>
+              </div>
     </p>
 <h5 class="display-5">Należności do spłaty:</h5>
 <ul>
@@ -24,17 +35,6 @@
             &nbsp;
             <a href="{% url 'split_app:pay_obligation' oblig.id transaction.id %}" class="btn btn-outline-success">Spłać należność</a>
             &nbsp;
-            <button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#platnosc_{{ forloop.counter }}">
-                Informacje o płatności
-            </button>
-            <div class="alert alert-primary collapse" id="platnosc_{{ forloop.counter }}">
-                <br>
-                Konto Bankowe: {{ oblig.user.profile.bank }}
-                <hr>
-                Blik na numer: {{ oblig.user.profile.phone }}
-                <br>
-                <br>
-              </div>
         </h4>
     <div class="card-body">
           <p class="font-weight-bold" style="display:inline">Wartość</p> -  {{ oblig.suma }} zł

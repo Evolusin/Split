@@ -43,8 +43,8 @@ def editprofile(request, user_id):
             form.save()
             return redirect("users:profile", user_id=eprofile.user_id)
 
-    context = {"eprofile":eprofile}
-    # return render(request, "registration/profile.html")
+    context = {"eprofile":eprofile, "form":form}
+    return render(request, "registration/edit_profile.html", context)
 
 # @login_required
 # def edit_profile(request):
