@@ -22,6 +22,9 @@ class EditProfile(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ["nick", "phone", "bank"]
+        widgets = {
+            "nick": forms.TextInput(attrs={"rows":1, "cols":10})
+        }
         labels = {
             "nick":"Nick",
             "phone":"Nr telefonu",
