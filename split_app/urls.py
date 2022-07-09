@@ -24,4 +24,9 @@ urlpatterns = [
         views.pay_obligation,
         name="pay_obligation",
     ),
+    path(
+        "edit_transaction/<int:transaction_id>",
+        views.edit_transaction,
+        name="edit_transaction",
+    ),
 ]

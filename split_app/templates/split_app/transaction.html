@@ -9,6 +9,7 @@
 
     <p>
     <a href="{% url 'split_app:new_obligation' transaction.id %}" class="btn btn-outline-primary"> Dodaj nową należność </a>
+   <a href="{% url 'split_app:edit_transaction' transaction.id %}" class="btn btn-outline-primary"> Edytuj splita </a>
     <button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#platnosc_{{ forloop.counter }}">
                 Informacje o płatności
             </button>

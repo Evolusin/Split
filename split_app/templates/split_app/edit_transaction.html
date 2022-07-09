@@ -1,0 +1,17 @@
+{% extends 'split_app/base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+
+{#    <p><a href="{% url 'split_app:transaction' var_transaction.id %}">{{ transaction }}</a></p>#}
+
+
+    <h1>Edycja splita: {{ var_transaction }}</h1>
+    <br>
+    <form action="{% url 'split_app:edit_transaction' var_transaction.id %}" method='post'>
+        {% csrf_token %}
+        {% bootstrap_form form %}
+    <button name="submit" class="btn btn-outline-primary">Zapisz zmiany</button>
+    </form>
+
+
+{% endblock %}

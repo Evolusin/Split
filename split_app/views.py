@@ -147,3 +147,20 @@ def pay_obligation(request, obligation_id, transaction_id):
         transaction.save(update_fields=["t_status"])
 
     return redirect("split_app:Transactions")
+
+
+def edit_transaction(request,transaction_id):
+    """Allows editing transaction by owner"""
+    var_transaction = Transaction.objects.get(id=transaction_id)
+    if var_transaction.owner != request.user:
+        raise Http404
+    if request.method != 'POST':
+        form = TransactionForm(instance=var_transaction)
+    else:
+        form = TransactionForm(instance=var_transaction, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("split_app:transaction", transaction_id=var_transaction.id)
+
+    context = {"var_transaction": var_transaction, "form": form}
+    return render(request, "split_app/edit_transaction.html", context)
