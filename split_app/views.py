@@ -16,18 +16,33 @@ def index(req):
     else:
         return render(req, "split_app/index.html")
 
+
 @login_required
 def transactions(req):
-    "Show all active transactions assign to owner/user"
+    "Show all owner active transactions"
     transactions_view = Transaction.objects.filter(
         (
-            (Q(obligation__user=req.user) & Q(obligation__o_status="New"))
-            | ((Q(obligation__isnull=True) & Q(owner=req.user)) | Q(owner=req.user))
+            # (Q(obligation__user=req.user) & Q(obligation__o_status="New"))|
+            ((Q(obligation__isnull=True) & Q(owner=req.user)) | Q(owner=req.user))
             & Q(t_status="New")
         )
     ).distinct()
     context = {"transactions": transactions_view}
     return render(req, "split_app/transactions.html", context)
+
+
+@login_required
+def topay_transactions(req):
+    """Show all active transactions assign to owner/user"""
+    qs_topay_transactions = Transaction.objects.filter(
+        (
+            (Q(obligation__user=req.user) & Q(obligation__o_status="New"))
+            # | ((Q(obligation__isnull=True) & Q(owner=req.user)) | Q(owner=req.user))
+            & Q(t_status="New")
+        )
+    ).distinct()
+    context = {"qs_topay_transactions": qs_topay_transactions}
+    return render(req, "split_app/topay_transactions.html", context)
 
 
 @login_required
@@ -48,7 +63,7 @@ def transactions_archive(req):
 
 @login_required
 def transaction(req, transaction_id):
-    """Show single transaction"""
+    """Show single active transaction for owner"""
     transaction = Transaction.objects.get(id=transaction_id)
     obligations = Obligation.objects.filter(
         Q(transaction=transaction_id) & Q(o_status="New")
@@ -56,6 +71,15 @@ def transaction(req, transaction_id):
     profile = Profile.user
     context = {"transaction": transaction, "obligations": obligations}
     return render(req, "split_app/transaction.html", context)
+
+
+def topay_transaction(req, transaction_id):
+    """Show single active qs_transaction for obligation user to pay"""
+    qs_transaction = Transaction.objects.get(id=transaction_id)
+    obligations = Obligation.objects.filter(Q(transaction=transaction_id) & Q(o_status="New"))
+    profile = Profile.user
+    context = {"qs_transaction": qs_transaction, "obligations": obligations}
+    return render(req, "split_app/topay_transaction.html", context)
 
 
 @login_required
@@ -156,7 +180,7 @@ def pay_obligation(request, obligation_id, transaction_id):
     if not o:
         transaction.save(update_fields=["t_status"])
 
-    return redirect("split_app:Transactions")
+    return redirect("split_app:topay_transactions")
 
 @login_required
 def edit_transaction(request,transaction_id):

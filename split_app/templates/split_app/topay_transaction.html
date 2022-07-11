@@ -1,22 +1,20 @@
 {% extends 'split_app/base.html' %}
 {% block page_header %}
-    <h3>Split: {{ transaction }}</h3>
+    <h3>Split: {{ qs_transaction }}</h3>
 {% endblock page_header %}
 
 {% block content %}
     {% load i18n %}
 
     <p>
-    <a href="{% url 'split_app:new_obligation' transaction.id %}" class="btn btn-outline-primary"> Dodaj nową należność </a>
-   <a href="{% url 'split_app:edit_transaction' transaction.id %}" class="btn btn-outline-primary"> Edytuj splita </a>
     <button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#platnosc_{{ forloop.counter }}">
                 Informacje o płatności
             </button>
             <div class="alert alert-primary collapse" id="platnosc_{{ forloop.counter }}">
                 <br>
-                Konto Bankowe: {{ transaction.owner.profile.bank }}
+                Konto Bankowe: {{ qs_transaction.owner.profile.bank }}
                 <hr>
-                Blik na numer: {{ transaction.owner.profile.phone }}
+                Blik na numer: {{ qs_transaction.owner.profile.phone }}
                 <br>
                 <br>
               </div>
@@ -24,22 +22,23 @@
 <h5 class="display-5">Należności do spłaty:</h5>
 <ul>
 {% for oblig in obligations %}
+    {% if user == oblig.user %}
     <div class="card mb-3">
         <h4 class="card-header">
-        {% language 'pl' %}
+            {% language 'pl' %}
+
             {{ oblig.user.profile.first_name }}
             {{ oblig.user.profile.last_name }}
         {% endlanguage %}
         &nbsp;
-            <a href="{% url 'split_app:edit_obligation' oblig.id %}" class="btn btn-outline-primary">Edytuj należność</a>
-            &nbsp;
-            <a href="{% url 'split_app:delete_obligation' oblig.id %}" class="btn btn-outline-danger">Usuń należność</a>
+            <a href="{% url 'split_app:pay_obligation' oblig.id qs_transaction.id %}" class="btn btn-outline-success">Spłać należność</a>
             &nbsp;
         </h4>
     <div class="card-body">
           <p class="font-weight-bold" style="display:inline">Wartość</p> -  {{ oblig.suma }} zł
     </div>
     </div>
+    {% endif %}
 {% empty %}
     <p>Na ten moment nie ma tu żadnych zaległych rzeczy do spłacenia</p>
 {% endfor %}
