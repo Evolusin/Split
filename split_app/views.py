@@ -132,6 +132,16 @@ def edit_obligation(request, obligation_id):
     context = {"obliagtion": obligation, "transaction": transaction, "form": form}
     return render(request, "split_app/edit_obligation.html", context)
 
+@login_required
+def delete_obligation(request, obligation_id):
+    """Allows owner of transaction to delete obligation"""
+    qs_obliagtion = Obligation.objects.get(id=obligation_id)
+    if qs_obliagtion.transaction.owner != request.user:
+        raise Http404
+    else:
+        qs_obliagtion.delete()
+        return redirect("split_app:transaction", transaction_id=qs_obliagtion.transaction.id)
+
 
 @login_required
 def pay_obligation(request, obligation_id, transaction_id):
@@ -148,7 +158,7 @@ def pay_obligation(request, obligation_id, transaction_id):
 
     return redirect("split_app:Transactions")
 
-
+@login_required
 def edit_transaction(request,transaction_id):
     """Allows editing transaction by owner"""
     var_transaction = Transaction.objects.get(id=transaction_id)
@@ -164,3 +174,4 @@ def edit_transaction(request,transaction_id):
 
     context = {"var_transaction": var_transaction, "form": form}
     return render(request, "split_app/edit_transaction.html", context)
+

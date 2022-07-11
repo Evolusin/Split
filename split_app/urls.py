@@ -8,6 +8,7 @@ urlpatterns = [
     path("transactions_archive/", views.transactions_archive, name="Transactions_archive"),
     path("transactions_archive/<int:transaction_id>/", views.transaction_a, name="transaction_a"),
     path("transactions/<int:transaction_id>/", views.transaction, name="transaction"),
+    path("delete_obligation/<int:obligation_id>/", views.delete_obligation, name="delete_obligation"),
     path("new_transaction/", views.new_transaction, name="new_transaction"),
     path(
         "new_obligation/<int:transaction_id>/",

@@ -6,7 +6,6 @@
 {% block content %}
     {% load i18n %}
 
-
     <p>
     <a href="{% url 'split_app:new_obligation' transaction.id %}" class="btn btn-outline-primary"> Dodaj nową należność </a>
    <a href="{% url 'split_app:edit_transaction' transaction.id %}" class="btn btn-outline-primary"> Edytuj splita </a>
@@ -35,6 +34,8 @@
             <a href="{% url 'split_app:edit_obligation' oblig.id %}" class="btn btn-outline-primary">Edytuj należność</a>
             &nbsp;
             <a href="{% url 'split_app:pay_obligation' oblig.id transaction.id %}" class="btn btn-outline-success">Spłać należność</a>
+            &nbsp;
+            <a href="{% url 'split_app:delete_obligation' oblig.id %}" class="btn btn-outline-danger">Usuń należność</a>
             &nbsp;
         </h4>
     <div class="card-body">
