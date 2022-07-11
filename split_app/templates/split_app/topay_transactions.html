@@ -4,9 +4,9 @@
 {% endblock page_header %}
 
 {% block content %}
+     {% if qs_topay_transactions|length %}
     <br>
     {% load i18n %}
-    {% if qs_topay_transactions|length %}
     <table class="table table-bordered table-striped">
          <TH>Kto stawiał?</TH><TH>Z kiedy?</TH><TH>Za co?</TH>
     {% endif %}
