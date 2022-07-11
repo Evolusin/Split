@@ -10,7 +10,10 @@
     {% load i18n %}
 
     <table class="table table-bordered table-striped">
-    <TH>Kto stawiał?</TH><TH>Z kiedy?</TH><TH>Za co?</TH>
+    {% if transactions|length %}
+         <TH>Kto stawiał?</TH><TH>Z kiedy?</TH><TH>Za co?</TH>
+    {% endif %}
+{#    <TH>Kto stawiał?</TH><TH>Z kiedy?</TH><TH>Za co?</TH>#}
     {% for trans in transactions %}
             <h4>
                 {% language 'pl' %}
@@ -23,7 +26,7 @@
     </TR>
             </h4>
     {% empty %}
-        <h3>Brak aktywnych splitów do uregulowania</h3>
+        <h3>Brak splitów</h3>
     {% endfor %}
 
 

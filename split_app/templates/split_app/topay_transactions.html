@@ -5,10 +5,11 @@
 
 {% block content %}
     <br>
-{#    <h3><a href="{% url 'split_app:new_transaction' %}" class="btn btn-outline-primary btn-lg">Dodaj nowego splita</a></h3>#}
     {% load i18n %}
+    {% if qs_topay_transactions|length %}
     <table class="table table-bordered table-striped">
          <TH>Kto stawiał?</TH><TH>Z kiedy?</TH><TH>Za co?</TH>
+    {% endif %}
     {% for trans in qs_topay_transactions %}
 
             <h4>
