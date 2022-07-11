@@ -1,0 +1,1 @@
+web: gunicorn Split.wsgi --log-file -
