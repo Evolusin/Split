@@ -6,13 +6,6 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 
-# class PasswordChange(models.Model):
-#     """This middleware checks if the user requires a password change and if he needs then forces him to change it"""
-#     def __init__(self):
-#         self.get_response = get_response
-#
-#     def __call__(self, request):
-
 class Profile(models.Model):
     """Profiles that expands built-in User class in Django.
      Adds firstnames/lastnames/emails/phone number (used in payment by BLIK)"""

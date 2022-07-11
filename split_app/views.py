@@ -72,7 +72,7 @@ def transaction(req, transaction_id):
     context = {"transaction": transaction, "obligations": obligations}
     return render(req, "split_app/transaction.html", context)
 
-
+@login_required
 def topay_transaction(req, transaction_id):
     """Show single active qs_transaction for obligation user to pay"""
     qs_transaction = Transaction.objects.get(id=transaction_id)
