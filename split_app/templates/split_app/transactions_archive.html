@@ -4,12 +4,10 @@
 {% endblock page_header %}
 
 {% block content %}
+    {% if transactions|length %}
     <br>
-
     {% load i18n %}
-
     <table class="table table-bordered table-striped">
-   {% if transactions|length %}
          <TH>Kto stawiał?</TH><TH>Z kiedy?</TH><TH>Za co?</TH>
     {% endif %}
     {% for trans in transactions %}
