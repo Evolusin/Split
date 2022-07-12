@@ -10,8 +10,8 @@ class Profile(models.Model):
     """Profiles that expands built-in User class in Django.
      Adds firstnames/lastnames/emails/phone number (used in payment by BLIK)"""
     user = models.OneToOneField(User, related_name="profile", on_delete=models.CASCADE, primary_key=True)
-    first_name = models.CharField(max_length=20, null=False, blank=False)
-    last_name = models.CharField(max_length=20, null=False, blank=False)
+    first_name = models.CharField(max_length=40, null=False, blank=False)
+    last_name = models.CharField(max_length=40, null=False, blank=False)
     nick = models.CharField(max_length=40, null=True, blank=True)
     email = models.CharField(max_length=50, null=False, blank=False)
     pass_change_force = models.BooleanField(default=True)
