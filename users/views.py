@@ -11,15 +11,17 @@ from .models import Profile
 @login_required
 def upassword_change(request):
     """Allows users to change his password"""
-    user = request.user.id
+    user = request.user
     if request.method != 'POST':
-        form = UPasswordChange(request.POST)
+        form = UPasswordChange(user=user)
     else:
-        form = UPasswordChange(request.POST)
+        form = UPasswordChange(data=request.POST, user=user)
         if form.is_valid():
             form.save()
-            messages.success(request,'Hasło zmienione')
+            # messages.success(request,'Hasło zmienione')
             return redirect('split_app:index')
+        else:
+            print(form.error_messages)
 
     context = {'form': form, 'user':user}
     return render(request, 'registration/upassword_change.html', context)

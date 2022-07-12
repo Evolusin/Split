@@ -8,7 +8,6 @@ class UPasswordChange(PasswordChangeForm):
     class Meta:
         model = User
 
-    #     print('test')
 
     def __init__(self, *args, **kwargs):
         super(UPasswordChange, self).__init__(*args, **kwargs)
