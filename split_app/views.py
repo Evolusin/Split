@@ -51,7 +51,7 @@ def transactions_archive(req):
     transactions = Transaction.objects.filter(
         (
             (((Q(obligation__isnull=False) & Q(owner=req.user)) | Q(owner=req.user))
-            & Q(t_status="Done")) | (Q(obligation__user=req.user) & Q(obligation__o_status='Done'))
+            & Q(t_status="Done")) | ((Q(obligation__user=req.user) | Q(owner__obligation=req.user)) & Q(obligation__o_status='Done'))
         )
     ).distinct()
     owner = Transaction.owner
