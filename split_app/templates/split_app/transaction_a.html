@@ -20,10 +20,8 @@
         {% endlanguage %}
         </h4>
     <div class="card-body">
-
-           Wartość -  {{ oblig.suma }} zł
-
-
+        Wartość -  {{ oblig.suma }} zł
+        <p>Spłacone dnia - {{ oblig.payment_date }}</p>
     </div>
     </div>
 {% empty %}
