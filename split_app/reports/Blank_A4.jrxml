@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TEST" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0ff108d1-76b2-4bed-906d-6e8b8a42c0a7">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="BAZA Django"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT 
+  DISTINCT "split_app_transaction"."id", 
+  "split_app_transaction"."owner_id", 
+  "split_app_transaction"."t_desc", 
+  "split_app_transaction"."t_date", 
+  "split_app_transaction"."t_status" 
+FROM 
+  "split_app_transaction" 
+  INNER JOIN "split_app_obligation" ON (
+    "split_app_transaction"."id" = "split_app_obligation"."transaction_id"
+  ) 
+WHERE 
+  (
+    "split_app_obligation"."user_id" = 2 
+    AND "split_app_obligation"."o_status" = 'New' 
+    AND "split_app_transaction"."t_status" = 'New'
+  )
+]]>
+	</queryString>
+	<field name="id" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="split_app_transaction"/>
+	</field>
+	<field name="owner_id" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="owner_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="owner_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="split_app_transaction"/>
+	</field>
+	<field name="t_desc" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="t_desc"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_desc"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="split_app_transaction"/>
+	</field>
+	<field name="t_date" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="t_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="split_app_transaction"/>
+	</field>
+	<field name="t_status" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="t_status"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_status"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="split_app_transaction"/>
+	</field>
+	<title>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="30" uuid="45eef802-064d-4e97-a45c-7ccf46589aec"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="30" uuid="63dffad2-2066-4bdd-bda8-57bc7332ae57"/>
+				<textFieldExpression><![CDATA[$F{owner_id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="23" uuid="6c6dc38a-e212-4162-a1cd-f5dc34242622">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="66da6c02-bd29-42ef-bf61-0f54701515cb"/>
+				</reportElement>
+				<text><![CDATA[Opis raportu]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="545" height="30" isPrintWhenDetailOverflows="true" uuid="e9cd9b25-eda0-48e9-a160-f4571b2a2ea4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="66da6c02-bd29-42ef-bf61-0f54701515cb"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{t_desc}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
