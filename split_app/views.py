@@ -40,7 +40,7 @@ def topay_transactions(req):
             # | ((Q(obligation__isnull=True) & Q(owner=req.user)) | Q(owner=req.user))
             & Q(t_status="New")
         )
-    ).distinct().agg
+    ).distinct()
     context = {"qs_topay_transactions": qs_topay_transactions}
     return render(req, "split_app/topay_transactions.html", context)
 
