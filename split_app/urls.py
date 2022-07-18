@@ -11,6 +11,7 @@ urlpatterns = [
     path("transactions/<int:transaction_id>/", views.transaction, name="transaction"),
     path("topay_transactions/<int:transaction_id>/", views.topay_transaction, name="topay_transaction"),
     path("delete_obligation/<int:obligation_id>/", views.delete_obligation, name="delete_obligation"),
+    path("delete_transaction/<int:transaction_id>/", views.delete_transaction, name="delete_transaction"),
     path("new_transaction/", views.new_transaction, name="new_transaction"),
     path(
         "new_obligation/<int:transaction_id>/",
