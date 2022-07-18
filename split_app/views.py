@@ -40,7 +40,7 @@ def topay_transactions(req):
             # | ((Q(obligation__isnull=True) & Q(owner=req.user)) | Q(owner=req.user))
             & Q(t_status="New")
         )
-    ).distinct()
+    ).distinct().agg
     context = {"qs_topay_transactions": qs_topay_transactions}
     return render(req, "split_app/topay_transactions.html", context)
 
@@ -198,4 +198,14 @@ def edit_transaction(request,transaction_id):
 
     context = {"var_transaction": var_transaction, "form": form}
     return render(request, "split_app/edit_transaction.html", context)
+
+@login_required
+def delete_transaction(request, transaction_id):
+    """Allows owner of transaction to delete transaction"""
+    qs_transaction = Transaction.objects.get(id=transaction_id)
+    if qs_transaction.owner != request.user:
+        raise Http404
+    else:
+        qs_transaction.delete()
+        return redirect("split_app:Transactions")
 
