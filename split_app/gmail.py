@@ -6,7 +6,7 @@ from Split.settings import get_secret
 def prepare_email(receiver, body):
     ctx = ssl.create_default_context()
     password = get_secret('GMAIL_PASSWORD')    # Your app password goes here
-    subject = "Split - Nowa należność do uregulowania"
+    subject = "Split Saventic - Nowa należność do uregulowania"
     sender = "saventicsplit@gmail.com"    # Your e-mail address
     body = body
     receiver = receiver  # Recipient's address
