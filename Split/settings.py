@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     "split_app",
     "users",
     "bootstrap4",
-    # "phonenumber_field",
+    # "split_app.apps.SplitAppConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
