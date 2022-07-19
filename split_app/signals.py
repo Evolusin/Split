@@ -2,7 +2,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from users.models import Profile
 from .models import Obligation
-import gmail
+from split_app.gmail import prepare_email
 
 
 @receiver(post_save, sender=Obligation)
@@ -14,9 +14,9 @@ def obligation_notification(sender, instance, created, **kwargs):
         print(qs_profile.email)
         print(qs_profile.first_name)
         print(qs_profile.last_name)
-        html = "https://splitappsaventic.herokuapp.com/"
-        msg = f"""
+        site = "https://splitappsaventic.herokuapp.com/"
+        body = f"""
         Cześć {qs_profile.first_name}, ktoś dodał właśnie na Splita należność o wartości {qs_obligation.suma} zł do spłacenia.
-        Zaloguj się do aplikacji na {html} aby sprawdzić szczegóły
+        Zaloguj się do aplikacji na {site} aby sprawdzić szczegóły
         """
-        gmail.prepare_email(msg)
+        prepare_email(qs_profile.email, body)
