@@ -6,6 +6,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 
+
 class Profile(models.Model):
     """Profiles that expands built-in User class in Django.
      Adds firstnames/lastnames/emails/phone number (used in payment by BLIK)"""
