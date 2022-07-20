@@ -17,6 +17,8 @@ def obligation_notification(sender, instance, created, **kwargs):
         site = "https://splitappsaventic.herokuapp.com/"
         body = f"""
 Cześć {qs_profile.first_name}, ktoś dodał właśnie na Splita należność o wartości {qs_obligation.suma} zł do spłacenia.
+Za co - {qs_obligation.transaction.t_desc}
+
 Zaloguj się do aplikacji na {site} aby sprawdzić szczegóły
 
 Pozdrawiam
