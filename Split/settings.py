@@ -21,12 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #     secrets = json.load(secrets_file)
 
 
-def get_secret(setting, secrets=secrets):
-    """Get secret setting or fail with ImproperlyConfigured"""
-    try:
-        return secrets[setting]
-    except KeyError:
-        raise ImproperlyConfigured("Set the {} setting".format(setting))
+# def get_secret(setting, secrets=secrets):
+#     """Get secret setting or fail with ImproperlyConfigured"""
+#     try:
+#         return secrets[setting]
+#     except KeyError:
+#         raise ImproperlyConfigured("Set the {} setting".format(setting))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/

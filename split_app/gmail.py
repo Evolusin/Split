@@ -1,6 +1,6 @@
 import smtplib
 import ssl
-from Split.settings import get_secret
+# from Split.settings import get_secret
 
 
 def prepare_email(receiver, body):
