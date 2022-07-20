@@ -22,6 +22,6 @@ Za co - {qs_obligation.transaction.t_desc}
 
 Zaloguj się do aplikacji na {site} aby sprawdzić szczegóły
 
-Pozdrawiam
+Split Saventic
         """
         prepare_email(qs_profile.email, body)
