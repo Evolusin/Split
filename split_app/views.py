@@ -7,6 +7,7 @@ from .models import Transaction, Obligation
 from users.models import Profile
 from .forms import TransactionForm, ObligationForm
 
+
 # Create your views here.
 def index(req):
     if req.user.is_authenticated:
