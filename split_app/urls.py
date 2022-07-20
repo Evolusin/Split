@@ -4,6 +4,7 @@ from . import views
 app_name = "split_app"
 urlpatterns = [
     path("", views.index, name="index"),
+    path("index2/", views.index2, name="index2"),
     path("transactions/", views.transactions, name="Transactions"),
     path("topay_transactions/", views.topay_transactions, name="topay_transactions"),
     path("transactions_archive/", views.transactions_archive, name="Transactions_archive"),

@@ -18,6 +18,15 @@ def index(req):
         return render(req, "split_app/index.html")
 
 
+def index2(req):
+    if req.user.is_authenticated:
+        profile = Profile.objects.get(user=req.user)
+        context = {"profile":profile}
+        return render(req, "split_app/index2.html", context)
+    else:
+        return render(req, "split_app/index2.html")
+
+
 @login_required
 def transactions(req):
     "Show all owner active transactions"
